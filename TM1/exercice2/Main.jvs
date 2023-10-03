@@ -1,0 +1,23 @@
+void main() {
+
+    String[] list = {
+        "\n*",
+        ".\n*\n\n~",
+        "\n, .\n(.*.)\n` ,",
+        "\n ' .\n[*-*]\n*. .*\n[*-*]\n ` ,",
+        "\n *** \n.   .\n[* *]\n[   ]\n[* *]\n'***'",
+        "\n.*-*.\n|*.*]\n[   *\n[*-*|\n'***'",
+        "\n.*-*.\n|'  *\n*   |\n*. .|\n'-**,",
+        "\n.--*.\n|'  |\n*   |\n* ..|\n'---'",
+        "\n.---.\n|'  |\n*   |\n| ..|\n'---'",
+    };
+
+    for (int i = 0; i < list.length; i++) {
+        println(list[i]);
+        sleep(1000);
+        clear();
+    }
+
+    // Random entre 1 et 7 EXCLU, donc entre 1 et 6
+    print("\n.---.\n| " + random(1, 7) + " |\n|   |\n| " + random(1, 7) + " |\n'---'");
+}

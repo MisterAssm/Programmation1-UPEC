@@ -1,0 +1,9 @@
+void main() {
+
+    String[] array =
+            new String[] {
+                "Message n1", "Message n2", "Message n3", "Message n4", "Message n5",
+            };
+
+    println("Message sélectionné : " + array[random(0, 6)]);
+}

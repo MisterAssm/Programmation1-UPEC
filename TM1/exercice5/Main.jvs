@@ -1,0 +1,8 @@
+void main() {
+
+    String firstName = readString(" Quel est votre prénom ? ");
+    String lastName = readString(" Quel est votre nom ? ");
+    int age = readInt(" Quel est votre age ? ");
+
+    println(firstName + " " + lastName + ", " + age + " ans.");
+}

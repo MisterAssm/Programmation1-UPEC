@@ -1,0 +1,17 @@
+void main() {
+
+    int n = readInteger("Nombre de notes a enregistrer");
+    int[] list = new int[n];
+    int sum = 0;
+
+    for (int i = 0; i < n; i++) {
+        int number = readInteger("Nombre numero " + i);
+        list[i] = number;
+        sum += number;
+    }
+
+    double average = (sum + 0.) / n;
+
+    println("Somme des " + n + " nombres : " + sum);
+    println("Moyenne des " + n + " nombres : " + average);
+}

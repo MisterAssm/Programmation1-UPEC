@@ -1,0 +1,12 @@
+void main() {
+
+    int n = 0;
+    int attemps = 0;
+
+    while (n != 6) {
+        attemps++;
+        n = random(1, 7);
+    }
+
+    println("6 trouve en '" + attemps + "' essais");
+}

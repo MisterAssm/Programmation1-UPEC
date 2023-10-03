@@ -1,0 +1,15 @@
+void main() {
+
+    int n = 5;
+    int[] intArray = new int[] {12, 64, 3, 97, 6}; // on aurait pu les demander à l'utilisateur
+
+    int currentMin = intArray[0];
+
+    for (int i = 1; i < intArray.length; i++) {
+        if (intArray[i] < currentMin) {
+            currentMin = intArray[i];
+        }
+    }
+
+    println("Le plus petit du tableau : " + currentMin);
+}

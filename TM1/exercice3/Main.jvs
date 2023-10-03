@@ -1,0 +1,16 @@
+// Condition ternaire : similaire à if - else
+String randomBetweenString(String first, String second) {
+    return random(0, 2) == 0 ? first : second;
+}
+
+String randomBetweenStrings(String... choices) {
+    return choices[random(0, choices.length)];
+}
+
+void main() {
+    print(" " + randomBetweenString("(", "@(") + " "); // Oreille gauche
+    print(" " + randomBetweenStrings("o", "*", "-") + " "); // Oeil Gauche
+    print(" " + randomBetweenString("_", ".") + " "); // Bouche
+    print(" " + randomBetweenStrings("o", "*", "-") + " "); // Oeil droit
+    println(" " + randomBetweenString(")", ")@") + " "); // Oreille droite
+}

@@ -1,0 +1,43 @@
+int[] copyArrayWithElement(int element, int[] array) {
+    int[] intArray = new int[array.length + 1];
+
+    for (int i = 0; i < array.length; i++) {
+        intArray[i] = array[i];
+    }
+
+    intArray[array.length] = element;
+    return intArray;
+}
+
+boolean isElementOnArray(int element, int[] intArray) {
+    for (int current : intArray) {
+        if (element == current) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void main() {
+    int[] intArray = new int[0];
+    int duplication;
+
+    while (true) {
+        int n = readInteger("Indiquer un nombre");
+
+        if (isElementOnArray(n, intArray)) {
+            duplication = n;
+            break;
+        } else {
+            intArray = copyArrayWithElement(n, intArray);
+        }
+    }
+
+    println("Vous avez deja entre '" + duplication + "'. Fin du programme");
+    print("Tableau final : [");
+
+    for (int i = 0; i < intArray.length; i++) {
+        print(intArray[i] + (i != intArray.length - 1 ? ", " : "]\n"));
+    }
+}

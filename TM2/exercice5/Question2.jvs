@@ -1,0 +1,19 @@
+void main() {
+    int b0 = 1;
+    int b1 = 1;
+    int b2 = 1;
+
+    int i = 2;
+
+    while (b2 < 50_000) {
+        i++;
+        int temp = b0 + b1 + b2 + (i - 3);
+        b0 = b1;
+        b1 = b2;
+        b2 = temp;
+
+        println("b" + i + " = " + b2);
+    }
+
+    println("Le plus petit n tel que bn > 50 000 est n=" + i);
+}

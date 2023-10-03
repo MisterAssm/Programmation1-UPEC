@@ -1,0 +1,209 @@
+int getMinimumBetween(int a, int b) {
+    return a < b ? a : b;
+}
+
+int getMinimumBetween(int a, int b, int c) {
+    int currentMin = getMinimumBetween(a, b);
+    return getMinimumBetween(currentMin, c);
+}
+
+int getMaximumBetween(int a, int b) {
+    return a > b ? a : b;
+}
+
+int getMaximumBetween(int a, int b, int c) {
+    int currentMax = getMaximumBetween(a, b);
+    return getMaximumBetween(currentMax, c);
+}
+
+boolean isMaxOrMin(int dice, int min, int max) {
+    return dice == min || dice == max;
+}
+
+int getRoundPoint() {
+
+    int dice1 = readInteger("Valeur du des 1");
+    int dice2 = readInteger("Valeur du des 2");
+    int dice3 = readInteger("Valeur du des 3");
+
+    int deMinimum = getMinimumBetween(dice1, dice2, dice3);
+    int deMaximum = getMaximumBetween(dice1, dice2, dice3);
+    int deIntermediaire =
+            isMaxOrMin(dice1, deMinimum, deMaximum)
+                    ? (isMaxOrMin(dice2, deMinimum, deMaximum) ? dice3 : dice2)
+                    : dice1;
+
+    int points = 1;
+
+    if (dice1 == dice2 && dice2 == dice3) {
+        points = (dice1 == 1) ? 7 : dice1;
+    } else if (deMinimum == deIntermediaire
+            || deIntermediaire == deMaximum) { // Les trois ne peuvent pas être égaux
+        points = (dice1 == dice2 ? dice3 : (dice1 == dice3 ? dice2 : dice1));
+    } else if (deMinimum == 1 && deIntermediaire == 2 && deMaximum == 4) {
+        points = 11;
+    } else if (deMaximum == deMinimum + 2 && deIntermediaire == deMinimum + 1) {
+        points = 2;
+    }
+
+    return points;
+}
+
+class Player {
+
+    private String name;
+    private int credit;
+
+    public Player(String name, int credit) {
+        this.name = name;
+        this.credit = credit;
+    }
+
+    public String getName() {
+        return "Joueur " + this.name;
+    }
+
+    public int getCredit() {
+        return this.credit;
+    }
+
+    public void minusCredit(int amount) {
+        this.credit -= amount;
+    }
+
+    public void addCredit(int amount) {
+        this.credit += amount;
+    }
+
+    public boolean canPlay() {
+        return this.credit > 0;
+    }
+
+    public void speakToPlayer(String... args) {
+        print("Joueur " + this.name + ": ");
+        println(args);
+    }
+
+    public int requestInt(String text) {
+        return readInteger("Joueur " + this.name + ": " + text);
+    }
+}
+
+class Game {
+
+    private Player player1;
+    private Player player2;
+
+    private boolean firstToPlay = false;
+    private int round = 0;
+
+    public Game() {
+        this.player1 = new Player("1", 100);
+        this.player2 = new Player("2", 100);
+    }
+
+    // retourne le gagnant de la partie
+    public void startGame() {
+        this.firstToPlay = false;
+
+        while (this.player1.canPlay() && this.player2.canPlay() && this.round < 254) {
+            playRound();
+        }
+    }
+
+    public boolean playRound() {
+        this.nextRound();
+        printGame();
+
+        // J1
+        int firstAmount =
+                getNextPlayer()
+                        .requestInt("Mise une somme (> 0)"); // Ne peut pas se retirer dès le
+        // début
+        // J2
+        int secondAmount =
+                getNextPlayer()
+                        .requestInt("\n1- Egalise la mise\n2- Double la mise\n3- Se retirer");
+
+        // J1
+        int thirdAmount =
+                getNextPlayerAndKeep().requestInt("\n1- Egalise la mise\n2- Se retirer");
+
+        if (secondAmount == 3 && thirdAmount == 2) {
+            println("Tout le monde s'est retiré. Personne ne gagne de crédit.");
+            return true;
+        }
+
+        boolean firstWin;
+
+        if (secondAmount == 3) {
+            firstWin = true;
+        } else if (thirdAmount == 2) {
+            firstWin = false;
+        } else {
+            int pointsFirst = 0;
+            int pointsSecond = 0;
+
+            while (pointsFirst == pointsSecond) {
+                pointsFirst = getRoundPoint();
+                pointsSecond = getRoundPoint();
+            }
+
+            firstWin = pointsFirst > pointsSecond;
+        }
+
+        if (firstWin) {
+            getNextPlayerAndKeep().addCredit(firstAmount);
+            println("Victoire " + getNextPlayerAndKeep().getName() + " (+" + firstAmount + ")");
+
+            switchNextPlayer();
+            getNextPlayerAndKeep().minusCredit(firstAmount);
+        } else {
+            int amount = secondAmount == 2 ? 2 * firstAmount : firstAmount;
+
+            if (thirdAmount == 2) {
+                getNextPlayerAndKeep().minusCredit(amount);
+                getNextPlayer().addCredit(amount);
+                println("Victoire " + getNextPlayerAndKeep().getName() + " (+" + amount + ")");
+            }
+        }
+
+        sleep(2000);
+
+        return true;
+    }
+
+    public void printGame(String[]... args) {
+        clear();
+        println("=== Manche " + this.round + " ===\n\n");
+        player1.speakToPlayer(player1.getCredit() + " Credits");
+        player2.speakToPlayer(player2.getCredit() + " Credits");
+        println(args);
+    }
+
+    public void switchNextPlayer() {
+        firstToPlay = !firstToPlay;
+    }
+
+    public Player getNextPlayerAndKeep() {
+        return firstToPlay ? player1 : player2;
+    }
+
+    public Player getNextPlayer() {
+        switchNextPlayer();
+        return getNextPlayerAndKeep();
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public int nextRound() {
+        return ++round;
+    }
+}
+
+void main() {
+
+    new Game().startGame();
+}

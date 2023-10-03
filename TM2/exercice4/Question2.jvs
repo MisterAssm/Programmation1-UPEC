@@ -1,0 +1,13 @@
+void main() {
+
+    int n = readInteger("Indiquer n");
+
+    int i = 0; // indice
+    int ai = n; // a_i
+
+    while (ai != 1) { // fonction croit continuellement
+        i++;
+        ai = (ai % 3 == 0 ? (ai / 3) : (5 * ai + 2));
+        println("a_" + i + " = " + ai);
+    }
+}

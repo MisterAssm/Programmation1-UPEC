@@ -1,0 +1,5 @@
+void main() {
+    for (int i = 7777; i >= 33; i -= 2) {
+        println(i);
+    }
+}

@@ -1,0 +1,54 @@
+int getMinimumBetween(int a, int b) {
+    return a < b ? a : b;
+}
+
+int getMinimumBetween(int a, int b, int c) {
+    int currentMin = getMinimumBetween(a, b);
+    return getMinimumBetween(currentMin, c);
+}
+
+int getMaximumBetween(int a, int b) {
+    return a > b ? a : b;
+}
+
+int getMaximumBetween(int a, int b, int c) {
+    int currentMax = getMaximumBetween(a, b);
+    return getMaximumBetween(currentMax, c);
+}
+
+boolean isMaxOrMin(int dice, int min, int max) {
+    return dice == min || dice == max;
+}
+
+void main() {
+
+    int dice1 = readInteger("Valeur du des 1");
+    int dice2 = readInteger("Valeur du des 2");
+    int dice3 = readInteger("Valeur du des 3");
+
+    int deMinimum = getMinimumBetween(dice1, dice2, dice3);
+    int deMaximum = getMaximumBetween(dice1, dice2, dice3);
+    int deIntermediaire =
+            isMaxOrMin(dice1, deMinimum, deMaximum)
+                    ? (isMaxOrMin(dice2, deMinimum, deMaximum) ? dice3 : dice2)
+                    : dice1;
+
+    int points = 1;
+
+    if (dice1 == dice2 && dice2 == dice3) {
+        points = (dice1 == 1) ? 7 : dice1;
+
+        println("BRELAN : " + points);
+    } else if (deMinimum == deIntermediaire
+            || deIntermediaire == deMaximum) { // Les trois ne peuvent pas être égaux
+        points = (dice1 == dice2 ? dice3 : (dice1 == dice3 ? dice2 : dice1));
+
+        println("AS : " + points);
+    } else if (deMinimum == 1 && deIntermediaire == 2 && deMaximum == 4) {
+        println("421 : " + points);
+    } else if (deMaximum == deMinimum + 2 && deIntermediaire == deMinimum + 1) {
+        println("Tierce : " + 2);
+    } else {
+        println("RIEN : " + points);
+    }
+}

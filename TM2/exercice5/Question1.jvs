@@ -1,0 +1,27 @@
+void main() {
+
+    int k = readInteger("Indiquer k");
+
+    int b0 = 1;
+    int b1 = 1;
+    int b2 = 1;
+
+    if (k == 0) {
+        println("b0 = " + b0);
+    } else if (k == 1) {
+        println("b1 = " + b1);
+    } else if (k == 2) {
+        println("b2 = " + b2);
+    } else {
+
+        for (int i = 3; i <= k; i++) {
+
+            int temp = b0 + b1 + b2 + (i - 3);
+            b0 = b1;
+            b1 = b2;
+            b2 = temp;
+
+            println("b" + i + " = " + b2);
+        }
+    }
+}

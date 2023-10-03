@@ -1,0 +1,31 @@
+void main() {
+
+    int[] tab = new int[] {12, 35, 47, 64};
+
+    for (int element : tab) {
+        println("element = " + element);
+    }
+
+    int[] tab2 = new int[4]; // Rempli de 0
+
+    for (int element : tab2) {
+        println("element = " + element);
+    }
+
+    tab2 = tab;
+    tab[0] = -5;
+
+    println("");
+
+    for (int element : tab2) {
+        println("element = " + element);
+    }
+
+    clear();
+
+    int[] array = new int[] {0, 7, 6, 9, 15};
+
+    array[0]++;
+
+    print(array[0]);
+}

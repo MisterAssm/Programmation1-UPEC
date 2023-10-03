@@ -1,0 +1,131 @@
+/* Jeu du Morpion
+    0 : Case vide
+    1 : Case X
+    2 : Case O
+*/
+
+class Game {
+
+    private int[][] board;
+    private boolean firstPlayerToPlay = true;
+
+    public Game() {
+        this.board = new int[][] {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+    }
+
+    private boolean checkDraw() {
+        for (int[] line : this.board) {
+            for (int element : line) {
+                if (element != 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    // Vérifier si les pions sont alignés horizontalement
+    private boolean checkHorizontaly(int valueToCheck, int lastRow, int lastColumn) {
+        sleep(100);
+
+        for (int element : this.board[lastRow]) {
+            if (element != valueToCheck) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Vérifier si les pions sont alignés verticalement
+    private boolean checkVerticaly(int valueToCheck, int lastRow, int lastColumn) {
+        for (int[] line : this.board) {
+            if (line[lastColumn] != valueToCheck) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Vérifier si les pions sont alignés diagonalement
+    private boolean checkDiagonally(int valueToCheck, int lastRow, int lastColumn) {
+        return (this.board[1][1] == valueToCheck)
+                && ((this.board[0][0] == valueToCheck && this.board[2][2] == valueToCheck)
+                        || (this.board[0][2] == valueToCheck
+                                && this.board[2][0] == valueToCheck));
+    }
+
+    private boolean checkWinFor(boolean firstPlayer, int lastRow, int lastColumn) {
+        int valueToCheck = firstPlayer ? 1 : 2;
+
+        return checkHorizontaly(valueToCheck, lastRow, lastColumn)
+                || checkVerticaly(valueToCheck, lastRow, lastColumn)
+                || checkDiagonally(valueToCheck, lastRow, lastColumn);
+    }
+
+    public void startGame() {
+
+        while (true) {
+            printGame();
+
+            int choose =
+                    readInteger(
+                            "Joueur "
+                                    + (firstPlayerToPlay ? 1 : 2)
+                                    + " : Choisissez une case entre 0 et 8");
+
+            int row = choose / 3;
+            int column = choose % 3;
+
+            if (choose < 0 || choose > 8 || this.board[row][column] != 0) {
+                println("Erreur, la case n'est pas correcte ...");
+                sleep(500);
+            } else {
+                this.board[row][column] = (firstPlayerToPlay ? 1 : 2);
+
+                if (checkWinFor(firstPlayerToPlay, row, column)) {
+                    printGame();
+                    println(
+                            "VICTOIRE : Le joueur "
+                                    + (firstPlayerToPlay ? 1 : 2)
+                                    + " remporte la partie.");
+                    break;
+                }
+
+                if (checkDraw()) {
+                    printGame();
+                    println("EGALITE : Personne ne remporte la partie.");
+                    break;
+                }
+
+                firstPlayerToPlay = !firstPlayerToPlay;
+            }
+        }
+    }
+
+    private String numberToElement(int number) {
+        return number == 1 ? "X" : number == 2 ? "O" : " ";
+    }
+
+    private void printGame() {
+        clear();
+
+        for (int[] line : board) {
+            println("-------------");
+            for (int element : line) {
+                print("| " + numberToElement(element) + " ");
+            }
+            println("|");
+        }
+        println("-------------");
+    }
+}
+
+void main() {
+
+    int[][] board = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+
+    new Game().startGame();
+}

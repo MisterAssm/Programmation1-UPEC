@@ -1,0 +1,25 @@
+void main() {
+
+    int n = readInteger("Combien de nombres dans la serie :");
+    int[] intArray = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        intArray[i] = readInteger("Nombre numero " + i);
+    }
+
+    boolean isPalindromic = true;
+
+    // Pour i allant de 0 à : (n-1)/2 si n impair sinon n/2
+    int i = 0;
+    while (isPalindromic && i < (n % 2 == 1 ? n - 1 : n) / 2) {
+        isPalindromic = intArray[i] == intArray[n - i - 1];
+
+        i++;
+    }
+
+    if (isPalindromic) {
+        println("La série est un palindrome");
+    } else {
+        println("La série n'est pas un palindrome");
+    }
+}

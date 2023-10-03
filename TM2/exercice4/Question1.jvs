@@ -1,0 +1,13 @@
+void main() {
+
+    int n = readInteger("Indiquer n");
+    int k = readInteger("Indiquer k");
+
+    int an = n; // a_0
+
+    for (int i = 1; i <= k; i++) {
+        an = (an % 3 == 0 ? (an / 3) : (2 * an + 1));
+
+        println("a_" + i + " = " + an);
+    }
+}

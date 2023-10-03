@@ -1,0 +1,22 @@
+void main() {
+
+    int n = readInteger("n");
+    int f0 = 0, f1 = 1, f2 = 0;
+
+    if (n == 1) {
+        f2 = 1;
+    } else if (n >= 2) {
+
+        int count = n - 1;
+
+        while (count != 0) {
+            f2 = f0 + f1;
+            f0 = f1;
+            f1 = f2;
+
+            count--;
+        }
+    }
+
+    println("f" + n + " = " + f2);
+}

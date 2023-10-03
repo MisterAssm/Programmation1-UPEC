@@ -1,0 +1,21 @@
+void main() {
+
+    int[] intArray = new int[100];
+    int input = 0;
+
+    while (intArray[input] < 3) {
+
+        input = readInteger("Choisir un nombre entre 0 et 99");
+
+        if (input < 0 || input > 99) {
+            println("Le nombre choisi est invalide !");
+            sleep(500);
+            clear();
+            input = 0;
+        } else {
+            intArray[input]++;
+        }
+    }
+
+    println("Vous avez déjà entré 3x le nombre '" + input + "', fin du programme.");
+}

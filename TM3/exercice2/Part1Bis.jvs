@@ -1,0 +1,16 @@
+
+void main() {
+
+    int n = 1_000_000;
+    int foundTimes = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (random(1, 7) == 6) {
+            foundTimes++;
+        }
+    }
+
+    double average = (0. + foundTimes) / n;
+
+    println("En moyenne, le tirage tombe sur 6 : " + average);
+}

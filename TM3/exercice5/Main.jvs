@@ -1,0 +1,27 @@
+void main() {
+
+    int y = readInteger("Indiquez est la valeur de y");
+    int x = 0;
+
+    boolean minus = false;
+
+    while (true) {
+        clear();
+        for (int i = 0; i < x; i++) {
+            print('-');
+        }
+
+        print('|');
+
+        for (int i = 0; i < y - x - 1; i++) {
+            print('-');
+        }
+
+        sleep(500);
+
+        x += (minus ? -1 : 1);
+        if (x == y - 1 || x == 0) {
+            minus = !minus;
+        }
+    }
+}

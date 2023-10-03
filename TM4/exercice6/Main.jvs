@@ -1,0 +1,61 @@
+void main() {
+
+    println("Pour sortir d'une série de nombres, donnez un nombre négatif");
+
+    int[] v1 = new int[0];
+    int[] v2 = new int[0];
+
+    int input = readInteger("Choisir le nombre numero " + (v1.length + 1) + " de la série v1");
+
+    while (input >= 0) {
+        int[] vtemp = new int[v1.length + 1];
+
+        for (int i = 0; i < v1.length; i++) {
+            vtemp[i] = v1[i];
+        }
+
+        vtemp[v1.length] = input;
+        v1 = vtemp;
+
+        input = readInteger("Choisir le nombre numero " + (v1.length + 1) + " de la série v1");
+    }
+
+    print("v1 : ");
+    for (int element : v1) {
+        print(element + " ");
+    }
+    println("");
+
+    input = readInteger("Choisir le nombre numero " + (v2.length + 1) + " de la série v2");
+
+    while (input >= 0) {
+        int[] vtemp = new int[v2.length + 1];
+
+        for (int i = 0; i < v2.length; i++) {
+            vtemp[i] = v2[i];
+        }
+
+        vtemp[v2.length] = input;
+        v2 = vtemp;
+
+        input = readInteger("Choisir le nombre numero " + (v2.length + 1) + " de la série v2");
+    }
+
+    print("v2 : ");
+    for (int element : v2) {
+        print(element + " ");
+    }
+    println("");
+
+    print("v1 + v2 = [");
+
+    for (int i = 0; i < v1.length; i++) {
+        print(v1[i] + v2[i]);
+
+        if (i < v1.length - 1) {
+            print(", ");
+        }
+    }
+
+    println("]");
+}
