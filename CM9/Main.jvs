@@ -1,0 +1,52 @@
+
+void printGrid(String[][] grid) {
+    clear();
+
+    for (String[] line : grid) {
+        print("|");
+        for (String element : line) {
+            print(element + "|");
+        }
+        println();
+    }
+}
+
+void main() {
+
+    int line = 5;
+    int column = 10;
+
+    int currentRow = 0;
+    int currentColumn = 0;
+
+    String[][] grid = new String[line][column];
+
+    for (int i = 0; i < line; i++) {
+        for (int j = 0; j < column; j++) {
+            grid[i][j] = (i == currentRow && j == currentColumn ? "*" : " ");
+        }
+    }
+
+    int input = 0;
+
+    while (input >= 0) {
+        // Pavé numérique, 8 est en haut, 2 en bas etc..
+        printGrid(grid);
+        input =
+                readInteger(
+                        "Quel est le déplacement du robot :\n(8) haut\n(2) bas\n(4) gauche\n(6) droite");
+        grid[currentRow][currentColumn] = " ";
+
+        if (input == 8 && currentRow > 0) {
+            currentRow--;
+        } else if (input == 2 && currentRow < grid.length - 1) {
+            currentRow++;
+        } else if (input == 4 && currentColumn > 0) {
+            currentColumn--;
+        } else if (input == 6 && currentColumn < grid[currentRow].length - 1) {
+            currentColumn++;
+        }
+
+        grid[currentRow][currentColumn] = "*";
+    }
+}
