@@ -1,0 +1,31 @@
+void main() {
+
+    int n = readInteger("Combien d'éléments est constituée votre liste ?");
+    int[] sequence = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        sequence[i] = readInteger("Element n." + (i + 1));
+    }
+
+    // % n car si on déplace de 6, en réalité on déplace de 1 (dans l'exemple du TM)
+    int index = readInteger("Permutation des éléments de combien de positions ?") % n;
+
+    // On peut aussi déplacer par la gauche
+    if (index < 0) {
+        index += n;
+    }
+
+    int[] newSequence = new int[n];
+
+    for (int i = 0; i < index; i++) {
+        newSequence[i] = sequence[n - (index - i)];
+    }
+
+    for (int i = 0; i < n - index; i++) {
+        newSequence[i + index] = sequence[i];
+    }
+
+    for (int element : newSequence) {
+        print(element + " ");
+    }
+}

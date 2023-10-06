@@ -1,0 +1,41 @@
+void main() {
+
+    int size = readInteger("Taille du tableau de boolean");
+    boolean[][] boolGrid = new boolean[size][size];
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            boolGrid[i][j] = random(0, 2) == 0;
+        }
+    }
+
+    int square = readInteger("Taille des carrés");
+
+    // nbre de lignes complètes
+    int fullRows = (size - (size % square)) / square;
+
+    for (int index = 0; index <= fullRows + 1; index++) {
+        clear();
+
+        for (int i = 0; i < square * min(index, fullRows); i++) {
+            for (int j = 0; j < min(index, fullRows) * square; j++) {
+                if (j % square == 0) {
+                    print("|");
+                }
+
+                print(boolGrid[i][j] ? "O" : "-");
+            }
+
+            if ((index == fullRows + 1) && fullRows % index != 0) {
+                print("|");
+                for (int j = fullRows * fullRows; j < size; j++) {
+                    print(boolGrid[i][j] ? "O" : "-");
+                }
+            }
+
+            println();
+        }
+
+        sleep(1000);
+    }
+}

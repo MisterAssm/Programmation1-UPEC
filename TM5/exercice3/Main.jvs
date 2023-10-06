@@ -1,0 +1,21 @@
+void main() {
+
+    int n = readInteger("Fournir un nombre IMPAIR");
+    String[][] grid = new String[n][n];
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            // diagonale d:g  ou  diagonale g:d
+            grid[i][j] = (j == n - i - 1 || j == i ? "X" : " ");
+        }
+    }
+
+    // Imprimer en console
+
+    for (String[] line : grid) {
+        for (String element : line) {
+            print(element);
+        }
+        println();
+    }
+}

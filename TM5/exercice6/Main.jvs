@@ -1,0 +1,119 @@
+int students, subjects;
+int[][] notes;
+
+void printStudents() {
+    for (int[] student : notes) {
+
+        for (int i = 0; i < student.length; i++) {
+            String element = (student[i] < 10 ? ("0" + student[i]) : student[i] + "");
+            print((i == 0 ? "u323_" + element : element) + " ");
+        }
+
+        println();
+    }
+}
+
+void addStudent() {
+    int[][] tempNotes = new int[++students][subjects + 1];
+
+    for (int i = 0; i < notes.length; i++) {
+        tempNotes[i] = notes[i];
+    }
+
+    tempNotes[students - 1] = new int[subjects + 1];
+    tempNotes[students - 1][0] = readInteger("Identifiant de l'eleve a ajouter");
+
+    for (int i = 0; i < subjects; i++) {
+        tempNotes[students - 1][i + 1] = readInteger("Note n." + i + " (nouvel eleve)");
+    }
+
+    notes = tempNotes;
+}
+
+int getStudentIndex(int id) {
+    int found = -1;
+
+    for (int i = 0; found < 0 && i < students; i++) {
+        if (notes[i][0] == id) {
+            found = i;
+        }
+    }
+
+    if (found < 0) {
+        println("Aucun eleve avec l'identifiant '" + id + "' n'a ete trouve...");
+        sleep(3000);
+    }
+
+    return found;
+}
+
+// On suppose que tous les identifiants sont
+void removeStudent(int id) {
+    int found = getStudentIndex(id);
+
+    if (found < 0) return;
+
+    int[][] tempNotes = new int[--students][subjects + 1];
+    int index = 0;
+
+    for (int i = 0; i < notes.length; i++) {
+        if (i != found) {
+            tempNotes[index++] = notes[i];
+        }
+    }
+
+    notes = tempNotes;
+}
+
+void editNote(int id, int subject, int value) {
+    int found = getStudentIndex(id);
+
+    if (found < 0) return;
+
+    if (subject < 1 || subject > subjects) {
+        println("Erreur: La matiere n'est pas correcte...");
+        sleep(3000);
+    }
+
+    notes[found][subject] = value;
+}
+
+void main() {
+
+    students = readInteger("Nombre d'eleves");
+    subjects = readInteger("Nombre de matieres");
+
+    notes = new int[students][subjects + 1];
+
+    for (int i = 0; i < students; i++) {
+        int id = readInteger("Identifiant de l'eleve n." + i);
+        notes[i][0] = id;
+        for (int j = 1; j < subjects + 1; j++) {
+            notes[i][j] = readInteger("Note n." + i + " (eleve n." + id + ")");
+        }
+    }
+
+    int input = 0;
+
+    while (input >= 0) {
+        clear();
+        printStudents();
+        input =
+                readInteger(
+                        "Que voulez-vous faire ?\n\n> (1) Ajouter un eleve\n> (2) Supprimer un eleve\n> (3) Modifier une note\n\n'-1' pour quitter le programme");
+
+        if (input == 1) {
+            addStudent();
+        } else if (input == 2) {
+            removeStudent(readInteger("Identifiant de l'eleve a supprimer"));
+        } else if (input == 3) {
+            editNote(
+                    readInteger("Identifiant de l'eleve a supprimer"),
+                    readInteger("Matiere a modifier"),
+                    readInteger("Nouvelle note"));
+        }
+    }
+
+    // Le tableau nomprenom et nommatiere fonctionne de la même manière
+    // L'utilisation de classes d'objets devient nécessaire...
+}
