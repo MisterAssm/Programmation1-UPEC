@@ -1,0 +1,20 @@
+void printArray(int[] array) {
+    print("[");
+    for (int element : array) {
+        print(element + " ");
+    }
+    println("]");
+}
+
+void permute(int[] array, int index, int newElement) {
+    array[index] = newElement;
+}
+
+void main() {
+
+    int array[] = new int[] {0, 1, 2, 3, 4, 5};
+
+    printArray(array);
+    permute(array, 4, -1);
+    printArray(array);
+}
