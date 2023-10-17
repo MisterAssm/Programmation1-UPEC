@@ -1,0 +1,21 @@
+int sommeMultiple(int[] array, int n) {
+    int sum = 0;
+
+    for (int i = 0; i < array.length; i += n) {
+        sum += array[i];
+    }
+
+    return sum;
+}
+
+void main() {
+
+    int[] array = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int[] array1 = new int[] {3, 5, 7, 9, 10, 5, 7, 10, 6, 7, 1};
+
+    println("=== TEST ===\n");
+
+    println("> sommeMultiple(0..10, 3) = " + sommeMultiple(array, 3)); // 3 + 6 + 9 = 18
+    println("> sommeMultiple(0..10, 3) = " + sommeMultiple(array, 2)); // 2 + 4 + ... = 30
+    println("> sommeMultiple(array1, 5) = " + sommeMultiple(array1, 5)); // 3 + 5 + 1 = 9
+}

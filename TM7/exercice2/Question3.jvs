@@ -1,0 +1,36 @@
+int[] tabHasard(int n, int h) {
+    int[] array = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        array[i] = random(0, h + 1);
+    }
+
+    return array;
+}
+
+void printArray(int[] array) {
+    for (int element : array) {
+        print(element + " ");
+    }
+    println();
+}
+
+void main() {
+
+    println("=== TEST ===\n");
+
+    print("> tabHasard(10, 5) = ");
+    printArray(tabHasard(10, 5));
+
+    print("> tabHasard(0, 3) = ");
+    printArray(tabHasard(0, 3));
+
+    print("> tabHasard(3, 0) = ");
+    printArray(tabHasard(3, 0));
+
+    print("> tabHasard(4, 10) = ");
+    printArray(tabHasard(4, 10));
+
+    print("> tabHasard(40, 1) = ");
+    printArray(tabHasard(40, 1));
+}

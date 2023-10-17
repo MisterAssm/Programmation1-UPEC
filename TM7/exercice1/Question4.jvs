@@ -1,0 +1,23 @@
+boolean brelan(int[] array) {
+    if (array.length < 3) return false;
+
+    for (int i = 2; i < array.length; i++) {
+        if (array[i] == array[i - 1] && array[i] == array[i - 2]) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void main() {
+
+    println("=== TEST ===\n");
+
+    println("> brelan({0, 1, 2, 3, 4, 5}) : " + brelan(new int[] {0, 1, 2, 3, 4, 5}));
+    println("> brelan({0, 0, 2, 3, 4, 5}) : " + brelan(new int[] {0, 0, 0, 3, 4, 5}));
+    println("> brelan({0, 1, 2, 5, 4, 5}) : " + brelan(new int[] {0, 1, 2, 5, 4, 5}));
+    println("> brelan({0, 1, 2, 5, 5, 5}) : " + brelan(new int[] {0, 1, 2, 5, 5, 5}));
+    println("> brelan({0, 1, 2, 5, -3, 3}) : " + brelan(new int[] {0, 1, 2, 3, -3, 3}));
+    println("> brelan({0, 1, 2, 5, -3, -3}) : " + brelan(new int[] {0, 1, 2, -3, -3, -3}));
+}

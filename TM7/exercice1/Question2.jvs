@@ -1,0 +1,21 @@
+boolean appartient(int[] array, int n) {
+    for (int element : array) {
+        if (element == n) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void main() {
+
+    println("=== TEST ===\n");
+
+    int[] array = new int[] {0, 5, 7, 24, 13, 5, -5, -2};
+
+    println("> appartient(array, 5) (true) : " + appartient(array, 5));
+    println("> appartient(array, 0) (true) : " + appartient(array, 0));
+    println("> appartient(array, -5) (true) : " + appartient(array, -5));
+    println("> appartient(array, 1) (false) : " + appartient(array, 1));
+}
