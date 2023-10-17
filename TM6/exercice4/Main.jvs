@@ -1,0 +1,78 @@
+int[] orderedArray(int a, int b, int c) {
+    int[] array = new int[] {a, b, c};
+
+    for (int i = 0; i < array.length; i++) {
+        int n = i % 2;
+
+        if (array[n] > array[n + 1]) {
+            int temp = array[n];
+            array[n] = array[n + 1];
+            array[n + 1] = temp;
+        }
+    }
+
+    return array;
+}
+
+// Autre méthode : on suppose que array est triée
+// Alors il suffit de vérifier que array[0] == array[2] (ou n-1)
+boolean isBrelan(int[] array) {
+    if (array.length > 1) {
+
+        int firstElement = array[0];
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] != firstElement) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+// On suppose que array est un tableau de 3 valeurs triée.
+// On suppose ici que isBrelan est faux (sinon juste vérifier que array[2] != 1)
+boolean isAs(int[] array) {
+    return array[0] == 1 && array[1] == 1;
+}
+
+boolean isFull(int[] array) {
+    return array[0] == 1 && array[1] == 2 && array[2] == 4;
+}
+
+boolean isTierce(int[] array) {
+    return array[1] == array[0] + 1 && array[2] == array[1] + 1;
+}
+
+String formatDice(int[] dice) {
+    String format = "";
+
+    for (int element : dice) {
+        format += element + " ";
+    }
+
+    return format;
+}
+
+void main() {
+
+    int[] dice = orderedArray(random(1, 7), random(1, 7), random(1, 7));
+
+    int points = 1;
+
+    // Brelan - As - 421 - Tierce
+
+    if (isBrelan(dice)) {
+        points = dice[0] == 1 ? 7 : dice[0];
+    } else if (isAs(dice)) {
+        points = dice[3];
+    } else if (isFull(dice)) {
+        points = 11;
+    } else if (isTierce(dice)) {
+        points = 2;
+    }
+
+    println("Dice : " + formatDice(dice));
+    println("Vous gagnez '" + points + "' points.");
+}
