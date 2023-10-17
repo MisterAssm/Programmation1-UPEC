@@ -1,0 +1,33 @@
+void drawMultiple(int n, char c) {
+    for (int i = 0; i < n; i++) {
+        print(c);
+    }
+}
+
+void drawLine(int x, int y) {
+    drawMultiple(x, '-');
+    print('|');
+    drawMultiple(y-x-1, '-');
+}
+
+void animeLine(int y, boolean reverse) {
+    for (int i = 0; i < y; i++) {
+        clear();
+        drawLine(reverse ? y - i - 1 : i, y);
+        sleep(200);
+    }
+}
+
+void animateIndefinitely(int y) {
+    while(true) {
+        animeLine(y, false);
+        animeLine(y, true);
+    }
+}
+
+void main() {
+
+    int y = readInteger("Indiquez est la valeur de y");
+
+    animateIndefinitely(y);
+}

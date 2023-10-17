@@ -1,0 +1,23 @@
+void dessinerPlusieurs(int n, char c) {
+    for (int i = 0; i < n; i++) {
+        print(c);
+    }
+}
+
+void dessinerLigne(int j, int n) {
+    dessinerPlusieurs(j, ' ');
+    dessinerPlusieurs(n, '*');
+}
+
+void dessinerTriangle(int h) {
+    for (int i = 0; i < h; i++) {
+        dessinerLigne(h - i - 1, 2 * i + 1);
+        println();
+    }
+}
+
+void main() {
+    int n = readInteger("Hauteur de triangle");
+
+    dessinerTriangle(n);
+}
