@@ -1,0 +1,28 @@
+int somme(int[] array) {
+    int sum = 0;
+
+    for (int element : array) {
+        sum += element;
+    }
+
+    return sum;
+}
+
+void main() {
+
+    int[] array = new int[] {5, 7, 10, 15, 13}; // == 50
+    int[] array1 = new int[] {2, -3, 5, -5}; // == -1
+    int[] array2 = new int[] {}; // == 0
+
+    println(
+            "=== TEST ===\n\n"
+                    + "> somme(new int[]{5, 7, 10, 15, 13}) = "
+                    + somme(array)
+                    + "\n"
+                    + "> somme(new int[]{2, -3, 5, -5}) = "
+                    + somme(array1)
+                    + "\n"
+                    + "> somme(new int[]{}) = "
+                    + somme(array2)
+                    + "\n");
+}

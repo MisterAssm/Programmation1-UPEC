@@ -1,0 +1,22 @@
+int sommeHasard(int[] array, int n) {
+    int sum = 0;
+
+    if (array.length > 0) {
+        for (int i = 0; i < n; i++) {
+            sum += array[random(0, array.length)];
+        }
+    }
+
+    return sum;
+}
+
+void main() {
+
+    println("=== TEST ===\n");
+
+    int[] array = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    println("> sommeHasard(array, 5) = " + sommeHasard(array, 5));
+    println("> sommeHasard(array, 5) = " + sommeHasard(array, 3));
+    println("> sommeHasard({}, 5) = " + sommeHasard(new int[] {}, 5));
+}
