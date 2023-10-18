@@ -1,0 +1,38 @@
+void rotation(int[] array) {
+    if (array.length > 1) {
+        int temp = array[array.length - 1];
+
+        for (int i = array.length - 1; i > 0; i--) {
+            array[i] = array[i - 1];
+        }
+
+        array[0] = temp;
+    }
+}
+
+void printArray(int[] array) {
+    for (int element : array) {
+        print(element + " ");
+    }
+    println();
+}
+
+void main() {
+
+    println("=== TEST ===");
+
+    int[] array = new int[] {0, 1, 2, 3, 4, 5};
+    rotation(array);
+    print("rotation({0, 1, 2, 3, 4, 5}) = ");
+    printArray(array);
+
+    int[] array1 = new int[] {0};
+    rotation(array1);
+    print("rotation({0}) = ");
+    printArray(array1);
+
+    int[] array2 = new int[] {};
+    rotation(array2);
+    print("rotation({}) = ");
+    printArray(array2);
+}

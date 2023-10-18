@@ -1,0 +1,45 @@
+void remplissage(int[] source1, int[] source2, int[] target) {
+    int n = 0;
+
+    while (n < target.length && n - source1.length < source2.length) {
+        boolean isSecondSource = n >= source1.length;
+        int i = isSecondSource ? n - source1.length : n;
+        int[] source = isSecondSource ? source2 : source1;
+
+        target[n] = source[i];
+
+        n++;
+    }
+
+    while (n < target.length) {
+        target[n++] = 0;
+    }
+}
+
+void printArray(int[] array) {
+    for (int element : array) {
+        print(element + " ");
+    }
+    println();
+}
+
+void main() {
+
+    int[] array = new int[] {1, 2, 3, 4, 5};
+    int[] array1 = new int[] {6, 7, 8, 9, 10};
+
+    int[] target = new int[] {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2};
+    int[] target1 = new int[7];
+    int[] target2 = new int[3];
+    int[] target3 = new int[0];
+
+    remplissage(array, array1, target);
+    remplissage(array, array1, target1);
+    remplissage(array, array1, target2);
+    remplissage(array, array1, target3);
+
+    printArray(target);
+    printArray(target1);
+    printArray(target2);
+    printArray(target3);
+}

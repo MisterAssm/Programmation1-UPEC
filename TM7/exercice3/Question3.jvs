@@ -1,0 +1,32 @@
+void echange(int[] array, int i, int j) {
+    int temp = array[i];
+
+    array[i] = array[j];
+    array[j] = temp;
+}
+
+void printArray(int[] array) {
+    for (int element : array) {
+        print(element + " ");
+    }
+    println();
+}
+
+void main() {
+
+    println("=== TEST ===");
+
+    int[] array = new int[] {0, 1, 2, 3, 4, 5};
+
+    print("echange({0, 1, 2, 3, 4, 5}, 0, 5) = ");
+    echange(array, 0, 5);
+    printArray(array);
+
+    print("echange({5, 1, 2, 3, 4, 0}, 5, 0) = ");
+    echange(array, 5, 0);
+    printArray(array);
+
+    print("echange({0, 1, 2, 3, 4, 5}, 3, 3) = ");
+    echange(array, 3, 3);
+    printArray(array);
+}
