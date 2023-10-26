@@ -1,6 +1,7 @@
 void remplissage(int[] source1, int[] source2, int[] target) {
     int n = 0;
 
+    // Tant qu'on a pas rempli entièrement target ET qu'on a pas fait le tour de source1 et 2
     while (n < target.length && n - source1.length < source2.length) {
         boolean isSecondSource = n >= source1.length;
         int i = isSecondSource ? n - source1.length : n;
@@ -11,6 +12,7 @@ void remplissage(int[] source1, int[] source2, int[] target) {
         n++;
     }
 
+    // On rempli les éventuelles cases restantes
     while (n < target.length) {
         target[n++] = 0;
     }
@@ -32,14 +34,23 @@ void main() {
     int[] target1 = new int[7];
     int[] target2 = new int[3];
     int[] target3 = new int[0];
+    int[] target4 = new int[] {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2};
+    int[] target5 = new int[] {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2};
+    int[] target6 = new int[] {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2};
 
     remplissage(array, array1, target);
     remplissage(array, array1, target1);
     remplissage(array, array1, target2);
     remplissage(array, array1, target3);
+    remplissage(new int[]{}, array1, target4);
+    remplissage(array, new int[]{}, target5);
+    remplissage(new int[]{}, new int[]{}, target6);
 
     printArray(target);
     printArray(target1);
     printArray(target2);
     printArray(target3);
+    printArray(target4);
+    printArray(target5);
+    printArray(target6);
 }

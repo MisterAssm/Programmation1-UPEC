@@ -1,0 +1,39 @@
+// On exploite ici le fait que Robusta rempli par défaut
+// Un tableau d'entier par des 0
+void transformeC(int[][] matrix) {
+    int n = matrix.length;
+
+    for (int i = 0; i < n; i++) {
+        matrix[i] = new int[n];
+    }
+}
+
+void printMatrix(int[][] matrix) {
+    println("[");
+    for (int[] line : matrix) {
+        print("[ ");
+        for (int element : line) {
+            print(element + " ");
+        }
+        println("]");
+    }
+    println("]\n");
+}
+
+void main() {
+    
+    println("=== TEST ===\n");
+
+    int[][] matrix = new int[][]{{5, 7, 9, 7, 41, 2}, {5, 4, 9, 741}};
+    int[][] matrix1 = new int[][]{{5, 7, 9, 7, 41, 2}, {5, 4, 9, 52, 7}, {}, {}, {6}};
+    int[][] matrix2 = new int[][]{};
+
+    transformeC(matrix);
+    transformeC(matrix1);
+    transformeC(matrix2);
+
+    printMatrix(matrix);
+    printMatrix(matrix1);
+    printMatrix(matrix2);
+
+}
