@@ -1,0 +1,39 @@
+int findMinimumIndexFrom(int[] array, int from) {
+    int minimumIndex = from;
+
+    for (int i = from + 1; i < array.length; i++) {
+        if (array[i] < array[minimumIndex]) {
+            minimumIndex = i;
+        }
+    }
+
+    return minimumIndex;
+}
+
+void sort(int[] array) {
+
+    for (int i = 0; i < array.length; i++) {
+        int temp = array[i];
+        int minimumIndex = findMinimumIndexFrom(array, i);
+
+        array[i] = array[minimumIndex];
+        array[minimumIndex] = temp;
+    }
+}
+
+void printArray(int[] array) {
+    print("[ ");
+    for (int element : array) {
+        print(element + " ");
+    }
+    println("]");
+}
+
+void main() {
+
+    int[] array = new int[] {9, 4, 0, 5, 7, 10, 4, 6, 2, 3};
+
+    printArray(array);
+    sort(array);
+    printArray(array);
+}

@@ -1,0 +1,60 @@
+boolean contains(int[] array, int value) {
+    for (int element : array) {
+        if (element == value) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+boolean notContains(int[] array, int value) {
+    return !contains(array, value);
+}
+
+int findMinimumIndex(int[] array, int[] excludeIndex) {
+    int minimumIndex = -1;
+
+    for (int i = 0; i < array.length; i++) {
+        if (notContains(excludeIndex, i)
+                && (minimumIndex < 0 || array[i] < array[minimumIndex])) {
+            minimumIndex = i;
+        }
+    }
+
+    return minimumIndex;
+}
+
+int[] sort(int[] array) {
+
+    int[] output = new int[array.length];
+    int[] mark = new int[array.length]; // Index déjà ajouté dans output
+
+    for (int i = 0; i < mark.length; i++) {
+        mark[i] = -1;
+    }
+
+    for (int i = 0; i < array.length; i++) {
+        int minimumIndex = findMinimumIndex(array, mark);
+        output[i] = array[minimumIndex];
+        mark[i] = minimumIndex;
+    }
+
+    return output;
+}
+
+void printArray(int[] array) {
+    print("[ ");
+    for (int element : array) {
+        print(element + " ");
+    }
+    println("]");
+}
+
+void main() {
+
+    int[] array = new int[] {7, 1, 0, 6, 7, 9, 16, 4, 16};
+
+    printArray(array);
+    printArray(sort(array));
+}
