@@ -1,4 +1,10 @@
 int[] tabMultiple(int[] array, int n) {
+    n = abs(n);
+
+    if (n == 0) {
+        return new int[0];
+    }
+
     int length = array.length;
     int size = length / n + (length % n == 0 ? 0 : 1);
     int[] multipleArray = new int[size];
