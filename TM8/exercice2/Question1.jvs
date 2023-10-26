@@ -1,0 +1,65 @@
+void main() {
+    test_sommeMultiple();
+}
+
+int sommeMultiple(int[] array, int n) {
+    int sum = 0;
+
+    for (int i = 0; n != 0 && i < array.length; i += abs(n)) {
+        sum += array[i];
+    }
+
+    return sum;
+}
+
+void test_sommeMultiple() {
+    println(sommeMultiple(new int[] {5, -12, 5, 5, 25}, 5));
+    println(sommeMultiple(new int[] {100, -21, 21, 21, -21, -2, 0, 7, 0, 13}, 3));
+    println(
+            sommeMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23, -23, -23
+                    },
+                    6));
+    println(
+            sommeMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23, -23, -23, 31
+                    },
+                    6));
+    println(
+            sommeMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23
+                    },
+                    6));
+    println(sommeMultiple(new int[0], 5));
+    println(sommeMultiple(new int[] {23}, 5));
+    println(sommeMultiple(new int[] {5, -12, 5, 5, 25}, -3));
+    println(
+            sommeMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23, -23, -23
+                    },
+                    -4));
+    println(sommeMultiple(new int[13], 3));
+    println(
+            sommeMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23, -23, -23
+                    },
+                    0));
+
+    println(
+            sommeMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23, -23, -23
+                    },
+                    100));
+}

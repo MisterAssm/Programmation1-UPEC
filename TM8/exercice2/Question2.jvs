@@ -1,0 +1,83 @@
+void main() {
+    test_tabMultiple();
+}
+
+int[] tabMultiple(int[] array, int n) {
+    n = abs(n);
+
+    if (n == 0) {
+        return new int[0];
+    }
+
+    int length = array.length;
+    int size = length / n + (length % n == 0 ? 0 : 1);
+    int[] multipleArray = new int[size];
+
+    for (int i = 0; i < size; i++) {
+        multipleArray[i] = array[n * i];
+    }
+
+    return multipleArray;
+}
+
+void test_tabMultiple() {
+    affiche(tabMultiple(new int[] {5, -12, 5, 5, 25}, 5));
+    affiche(tabMultiple(new int[] {100, -21, 21, 21, -21, -2, 0, 7, 0, 13}, 3));
+    affiche(
+            tabMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23, -23, -23
+                    },
+                    6));
+    affiche(
+            tabMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23, -23, -23, 31
+                    },
+                    6));
+    affiche(
+            tabMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23
+                    },
+                    6));
+    affiche(tabMultiple(new int[0], 5));
+    affiche(tabMultiple(new int[] {23}, 5));
+    affiche(tabMultiple(new int[] {5, -12, 5, 5, 25}, -3));
+    affiche(
+            tabMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23, -23, -23
+                    },
+                    -4));
+    affiche(tabMultiple(new int[13], 3));
+    affiche(
+            tabMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23, -23, -23
+                    },
+                    0));
+    affiche(
+            tabMultiple(
+                    new int[] {
+                        4, 3, 5, 7, 1, 2, -3, 2, 7, 11, 4, 5, 3, 9, 12, 76, 31, 31, 223, 1, 5,
+                        -23, -23, -23
+                    },
+                    100));
+}
+
+void affiche(int[] tab) {
+    print(" [ ");
+    for (int i = 0; i < tab.length - 1; i++) {
+        print(tab[i] + " ,");
+    }
+    if (tab.length > 0) {
+        print(tab[tab.length - 1]);
+    }
+    println(" ] ");
+}
