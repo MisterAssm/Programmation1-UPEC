@@ -1,0 +1,10 @@
+void main() {
+    java.io.OutputStreamWriter fecriture = openOut("pippo.txt");
+
+    printlnToFile(fecriture, readString("Qu'est ce que je dois ecrire ?"));
+    printlnToFile(fecriture, "Toto");
+    printlnToFile(fecriture, "Zaza");
+    printlnToFile(fecriture, "10");
+
+    closeOut(fecriture);
+}

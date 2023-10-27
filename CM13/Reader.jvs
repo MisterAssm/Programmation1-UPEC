@@ -1,0 +1,10 @@
+void main() {
+    java.util.Scanner flecture = openIn("pippo.txt");
+
+    println(readStringFromFile(flecture));
+    println(readStringFromFile(flecture));
+    println(readStringFromFile(flecture));
+    println(readIntFromFile(flecture) + "");
+
+    closeIn(flecture);
+}
