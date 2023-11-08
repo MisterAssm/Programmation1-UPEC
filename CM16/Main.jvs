@@ -1,0 +1,244 @@
+class Notes {
+    double suites;
+    double groupe;
+    double physique;
+    double anglais;
+    double prog;
+    double outils;
+    double exprs;
+
+    public Notes(
+            double suites,
+            double groupe,
+            double physique,
+            double anglais,
+            double prog,
+            double outils,
+            double exprs) {
+
+        this.suites = suites;
+        this.groupe = groupe;
+        this.physique = physique;
+        this.anglais = anglais;
+        this.prog = prog;
+        this.outils = outils;
+        this.exprs = exprs;
+    }
+
+    void afficherNotes() {
+        println("Physique > " + physique);
+        println("Anglais > " + anglais);
+        println("Programmation > " + prog);
+        println("Outils > " + outils);
+        println("Technique d'expression > " + exprs);
+    }
+
+    void augmenteAnglais(double value) {
+        anglais += value;
+    }
+
+    double calculMoyenne() {
+        return (physique + anglais + prog + outils + exprs) / 5;
+    }
+}
+
+class Etudiant {
+    String nom;
+    String prenom;
+    int age;
+    Notes notes;
+    String sexe;
+
+    public Etudiant(String nom, String prenom, int age, Notes notes, String sexe) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.notes = notes;
+        this.sexe = sexe;
+    }
+
+    String fullName() {
+        return prenom + " " + nom;
+    }
+
+    double takeIfGreather(double note) {
+        return note > 10 ? note : 0;
+    }
+
+    Etudiant redoublement() {
+        Notes newNotes =
+                new Notes(
+                        this.notes.suites,
+                        this.notes.groupe,
+                        takeIfGreather(this.notes.physique),
+                        takeIfGreather(this.notes.anglais),
+                        takeIfGreather(this.notes.prog),
+                        takeIfGreather(this.notes.outils),
+                        takeIfGreather(this.notes.exprs));
+
+        return new Etudiant(this.nom, this.prenom, this.age, newNotes, this.sexe);
+    }
+}
+
+class Groupe {
+    String numero;
+    Etudiant[] liste;
+    Etudiant delegue;
+
+    public Groupe(String numero, Etudiant[] liste) {
+        this.numero = numero;
+        this.liste = liste;
+        this.delegue = null;
+    }
+
+    public Groupe(String numero, int nbInscrits) {
+        this.numero = numero;
+        this.liste = new Etudiant[nbInscrits];
+        this.delegue = null;
+    }
+
+    boolean isFull() {
+        for (Etudiant student : liste) {
+            if (student == null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    boolean addStudent(Etudiant student) {
+        for (int i = 0; i < liste.length; i++) {
+            if (liste[i] == null) {
+                liste[i] = student;
+            }
+        }
+
+        return false;
+    }
+
+    void makeDelegue(Etudiant student) {
+        this.delegue = student;
+    }
+
+    boolean containsStudent(Etudiant student) {
+        for (Etudiant element : liste) {
+            if (element == student) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    boolean removeStudent(Etudiant student) {
+        for (int i = 0; i < liste.length; i++) {
+            if (liste[i] == student) {
+                liste[i] = null;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    Etudiant getBestStudent() {
+        Etudiant current = null;
+
+        for (Etudiant student : liste) {
+            if (student != null
+                    && (current == null
+                            || (current.notes.calculMoyenne()
+                                    < student.notes.calculMoyenne()))) {
+                current = student;
+            }
+        }
+
+        return current;
+    }
+
+    double calculMoyenneGroupe() {
+        int count = 0;
+        double sum = 0;
+
+        for (Etudiant student : liste) {
+            if (student != null) {
+                ++count;
+                sum += student.notes.calculMoyenne();
+            }
+        }
+
+        return sum / count;
+    }
+
+    void printGroup() {
+        println("--- Etudiant du groupe " + this.numero + " ---");
+
+        for (Etudiant student : liste) {
+            if (student != null) {
+                println("> " + student.fullName());
+            }
+        }
+
+        println("\n--------- FIN -----------");
+    }
+}
+
+// J'ai regroupé saisirNotes et creerNotes
+Notes creerNotes() {
+    return new Notes(
+            readDouble("Saisir la valeur suites (je sais pas ce que c'est)"),
+            readDouble("Saisir la valeur groupe"),
+            readDouble("Saisir la valeur physique"),
+            readDouble("Saisir la valeur anglais"),
+            readDouble("Saisir la valeur prog"),
+            readDouble("Saisir la valeur outils"),
+            readDouble("Saisir la valeur exprs"));
+}
+
+Etudiant saisirEtudiant() {
+    return new Etudiant(
+            readString("Nom de l'etudiant"),
+            readString("Prenom de l'etudiant"),
+            readInteger("Age de l'etudiant"),
+            creerNotes(),
+            readString("Sexe de l'etudiant (M/F)"));
+}
+
+Groupe creerGroupe() {
+    return new Groupe(
+            readString("Saisir le numero du Groupe"),
+            readInteger("Saisir la capacite maximale du Groupe"));
+}
+
+Groupe creerGroupe(Etudiant[] students) {
+    return new Groupe(readString("Saisir le numero du Groupe"), students);
+}
+
+Groupe creerGroupeComplet() {
+    Groupe groupe = creerGroupe();
+
+    for (int i = 0; i < groupe.liste.length; i++) {
+        groupe.liste[i] = saisirEtudiant();
+    }
+
+    return groupe;
+}
+
+void main() {
+
+    Groupe groupe = new Groupe("DLMI", 15);
+
+    println("full : " + groupe.isFull());
+
+    /*
+    Etudiant etudiant = saisirEtudiant();
+    Etudiant redoublement = etudiant.redoublement();
+
+    println("Notes de l'etudiant : " + etudiant.fullName());
+    etudiant.notes.afficherNotes();
+
+    println("\n--------\n");
+    println("En cas de redoublement, voici les notes :");
+    redoublement.notes.afficherNotes();*/
+}

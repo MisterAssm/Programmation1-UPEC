@@ -1,0 +1,21 @@
+class Etudiant {
+
+    String firstName;
+    String lastName;
+
+    public Etudiant(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    String fullName() {
+        return this.firstName + " " + this.lastName;
+    }
+}
+
+void main() {
+
+    Etudiant student = new Etudiant("Assim", "Zemouchi");
+
+    println("Etudiant selectionne : " + student.fullName());
+}
