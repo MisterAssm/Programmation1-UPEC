@@ -1,0 +1,88 @@
+void main() {
+
+    Panier panier = new Panier();
+    int input = 0;
+
+    while (input != -1) {
+        if (input == 1
+                && !panier.ajouterArticle(
+                        new Article(
+                                readString("Indiquez le nom de l'article"),
+                                readInteger("Indiquez le prix de l'article")))) {
+
+            println(
+                    "Une erreur est survenue : votre panier est plein, vous ne pouvez pas rajouter d'article...");
+        }
+
+        clear();
+
+        println("Tapez '1' - Ajouter un article à votre panier");
+        println("Tapez '-1' - Quitter");
+
+        panier.afficherPanier();
+        input = readInteger("Que voulez-vous faire ?");
+    }
+}
+
+class Article {
+    String nom;
+    double prix;
+
+    public Article(String nom, double prix) {
+        this.nom = nom;
+        this.prix = prix;
+    }
+
+    void afficherArticle() {
+        println("L'article " + nom + " coute " + prix + " euros.");
+    }
+}
+
+class Panier {
+    Article[] articles;
+    int nbArticles;
+
+    public Panier() {
+        this.articles = new Article[0];
+        this.nbArticles = 0;
+    }
+
+    void afficherPanier() {
+        println("Votre panier contient " + nbArticles + " article(s)");
+        for (Article article : articles) {
+            print("> ");
+            article.afficherArticle();
+        }
+    }
+
+    int prixTotal() {
+        int price = 0;
+
+        for (Article article : articles) {
+            price += article.prix;
+        }
+
+        return price;
+    }
+
+    boolean panierPlein() {
+        return nbArticles >= 10;
+    }
+
+    boolean ajouterArticle(Article article) {
+        if (panierPlein()) {
+            return false;
+        }
+
+        this.nbArticles += 1;
+        Article[] array = new Article[this.nbArticles];
+
+        for (int i = 0; i < this.articles.length; i++) {
+            array[i] = this.articles[i];
+        }
+
+        array[this.nbArticles - 1] = article;
+        this.articles = array;
+        return true;
+    }
+}

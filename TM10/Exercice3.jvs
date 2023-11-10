@@ -1,0 +1,54 @@
+void main() {}
+
+class Personne {
+    String nom;
+    String prenom;
+    int age;
+    int taille;
+
+    // Je préfére créer un constructeur, je trouve ça plus propre
+    public Personne(String nom, String prenom, int age, int taille) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.taille = taille;
+    }
+
+    void anniversaire() {
+        println("Joyeux anniversaire " + prenom + nom + " (" + age++ + ")");
+    }
+
+    void afficherFichePerso() {
+        println("Fiche personnelle de " + prenom + " " + nom);
+        println("> " + age + " ans");
+        println("> " + taille + " cm");
+    }
+}
+
+Personne plusGrand(Personne personne1, Personne personne2) {
+    return personne1.taille > personne2.taille ? personne1 : personne2;
+}
+
+boolean estPlusJeune(Personne personne1, Personne personne2) {
+    return personne1.age < personne2.age;
+}
+
+double agesPersonnes(Personne[] personnes) {
+    int sum = 0;
+
+    for (Personne personne : personnes) {
+        sum += personne.age;
+    }
+
+    return sum / (personnes.length + 0.);
+}
+
+Personne trouvePersonne(Personne[] personnes, String nom) {
+    for (Personne personne : personnes) {
+        if (equal(personne.nom, nom)) {
+            return personne;
+        }
+    }
+
+    return null;
+}

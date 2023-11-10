@@ -1,0 +1,53 @@
+class Personne {
+    String nom;
+    String prenom;
+    int age;
+    int taille;
+
+    // Je préfére créer un constructeur, je trouve ça plus propre
+    public Personne(String nom, String prenom, int age, int taille) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.taille = taille;
+    }
+
+    void afficherFichePerso() {
+        println("Fiche personnelle de " + prenom + " " + nom);
+        println("> " + age + " ans");
+        println("> " + taille + " cm");
+    }
+}
+
+Personne saisirFichePerso() {
+    return new Personne(
+            readString("Nom"), readString("Prenom"), readInteger("Age"), readInteger("Taille"));
+}
+
+void main() {
+    Personne assim = new Personne("Zemouchi", "Assim", 18, 180);
+    Personne essam = new Personne("Zemouchi", "Essam", 10, 150);
+
+    println(
+            "Personne 1 : "
+                    + assim.prenom
+                    + " "
+                    + assim.nom
+                    + " ("
+                    + assim.age
+                    + " ans) mesure "
+                    + assim.taille
+                    + "cm");
+    println(
+            "Personne 2 : "
+                    + essam.prenom
+                    + " "
+                    + essam.nom
+                    + " ("
+                    + essam.age
+                    + " ans) mesure "
+                    + essam.taille
+                    + "cm");
+
+    saisirFichePerso().afficherFichePerso();
+}
