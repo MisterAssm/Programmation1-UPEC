@@ -26,7 +26,7 @@ class SchoolClass {
 ``5.`` Non *voir exemple ci-dessus*
  
 ``6.`` 
-    ``a.`` L'avantage de cette approche est qu'il est plus simple à utiliser, à stocker et garantie que chaque point soit bien enregistré (que l'on ai bien (x, y, z) pour tous les points et non (z, x, y) ou des valeurs supperflux).
+``a.`` L'avantage de cette approche est qu'il est plus simple à utiliser, à stocker et garantie que chaque point soit bien enregistré (que l'on ai bien (x, y, z) pour tous les points et non (z, x, y) ou des valeurs supperflux).
         L'inconvénéant est qu'on ne peut pas utiliser de boucles pour parcourir les valeurs. 
     
-    ``b.`` On peut créer un tableau de Point, dans ce cas on peut itérer chacun de nos points, mais nous devrons tout de même appeler les attributs x, y ou z pour obtenir une coordonnée précise.
+``b.`` On peut créer un tableau de Point, dans ce cas on peut itérer chacun de nos points, mais nous devrons tout de même appeler les attributs x, y ou z pour obtenir une coordonnée précise.
